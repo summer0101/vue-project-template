@@ -1,0 +1,6 @@
+//$px为需要转换设计图尺寸
+$ui-width: 750;
+
+@function tovw($px) {
+  @return $px / $ui-width * 100vw;
+}
