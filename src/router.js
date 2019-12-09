@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import LoginView from "./components/Login.vue"
+import DashView from "./components/Dash.vue"
+import NotFoundView from "./components/404.vue"
+
 Vue.use(Router)
 /**
  * router入口文件只负责管理所有页面的路由
@@ -11,14 +15,33 @@ Vue.use(Router)
  * 可以自行设置默认路由
  * 如添加首页或者404页面
  */
-let routers = [
+
+let routes = [
   {
-    path: '/',
+    path: "/login",
+    component: LoginView,
     meta: {
-      title: "vue项目基础模板"
+      public: true,
+      onlyWhenLoggedOut: true
+    }
+  },
+  {
+    path: "*",
+    component: NotFoundView,
+    meta: {
+      public: true
     }
   }
-];
+]
+let rootRoutes = {
+  path: "/",
+  component: DashView,
+  children: [{
+      path: "/",
+      redirect: ''
+    }
+  ]
+}
 
 /**
  * require.context 实现流程自动化
@@ -33,11 +56,13 @@ routerContext.keys().forEach(route => {
   /**
   * 兼容 import export 和 require module.export 两种规范
   */
-  routers = [...routers, ...(routerModule.default || routerModule)]
+ rootRoutes.children = [...rootRoutes.children, ...(routerModule.default || routerModule)]
 });
 
+routes.push(rootRoutes)
+console.log(routes)
 export default new Router({
   mode:'history',
-  base:'/vue项目基础模板/',
-  routes: routers
+  base:'/',
+  routes: routes
 });

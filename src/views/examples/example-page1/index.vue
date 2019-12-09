@@ -4,3 +4,11 @@
     <test-common></test-common>
   </div>
 </template>
+<script>
+import testCommon from "@/components/test"
+export default {
+  components: {
+    testCommon
+  }
+}
+</script>
