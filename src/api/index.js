@@ -3,6 +3,18 @@
  * 遍历业务线api
  * api内为公用api
  */
+
+import axiosExtensionsServer from 'axios-extensions-server';
+
+let http = axiosExtensionsServer.create({
+    loadProgressBar: false,
+    headers: {},
+    createOptions: {},
+    errCallback(err){
+        console.log(err.status)
+        console.log(err.msg)
+    }
+})
 let api = {
     getInfoBase: process.env.VUE_APP_API_PREFIX + '/api-passport/user/info/base',
 };
