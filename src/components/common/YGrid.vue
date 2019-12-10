@@ -14,10 +14,7 @@
       @current-change-list="handleSingleChange"
       :disabled="disabled"
     >
-      <template
-        slot="columnDataHeader"
-        v-if="gridOptions.customColumnDataHeader"
-      >
+      <template slot="columnDataHeader" v-if="gridOptions.customColumnDataHeader">
         <slot name="columnDataHeader"></slot>
       </template>
     </y-table>
@@ -253,16 +250,12 @@ export default {
           }
           if (isPageable) {
             resolve({
-              data: self.gridOptions.treeable
-                ? self.$util.treeToArray(result.list)
-                : result.list,
+              data: result.list,
               total: result.total
             });
           } else {
             resolve({
-              data: self.gridOptions.treeable
-                ? self.$util.treeToArray(result)
-                : result,
+              data: result,
               total: result.length
             });
           }

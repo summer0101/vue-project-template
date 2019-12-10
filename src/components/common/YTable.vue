@@ -361,7 +361,6 @@ export default {
     handleSizeChange(size) {
       if (this.pageable) {
         this.$emit("size-change", size);
-        console.log(123);
       }
     },
 
